@@ -2,6 +2,11 @@
 
 A small, runnable agentic + deterministic support triage pipeline for a digital postcard startup.
 
+## Submission Deliverables
+- GitHub repo: https://github.com/mahianyuallan/digital-postcard-agentic-pipeline
+- Loom walkthrough (3-5 min): https://www.loom.com/share/016c5f6e55884f9dae5c84a0d3ee690d
+- Short write-up: `writeup.md`
+
 ## What this project does
 - Accepts support tickets through FastAPI (`POST /api/v1/tickets/process`).
 - Runs a purposeful LLM triage step to:
