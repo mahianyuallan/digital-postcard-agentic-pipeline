@@ -1,0 +1,7 @@
+﻿{
+  "customer_email": "customer@example.com",
+  "customer_name": "Alex",
+  "order_id": "ORD-2026-001",
+  "subject": "Refund request for delayed postcard",
+  "message": "My postcard has not been delivered in over two weeks. I would like a refund please."
+}

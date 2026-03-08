@@ -1,0 +1,9 @@
+﻿I built a complete local project called `digital-postcard-agentic-pipeline` that automates first-pass customer support triage for a digital postcard startup. The system accepts tickets via FastAPI, runs an LLM triage step, applies deterministic controls, routes the outcome, and persists results to SQLite with structured JSON logging.
+
+I chose this workflow because support triage is a practical operations use case where agentic behavior adds value but cannot be trusted without control gates. The LLM is used for meaningful work: category classification, urgency estimation, key field extraction, and draft reply generation. Deterministic checks then enforce reliability through strict schema validation, allowed categories, confidence thresholding, and required-field rules for transactional categories.
+
+I implemented the pipeline as a reusable workflow runner with modular steps (`LLMTriageStep`, `ValidationGateStep`, `RoutingStep`, `PersistStep`). This design makes it straightforward to add another workflow by composing a different step sequence without rewriting core infrastructure. The LLM provider is isolated behind a service interface with two modes: `mock` for local demos and `openai` for real integration.
+
+Assumptions: Python 3.11+, SQLite as default persistence, no authentication (to keep scope focused), and `LLM_MODE=mock` as the default so the assignment is runnable without secrets. I also assumed a confidence threshold of `0.75` as a practical baseline for auto-processing.
+
+One intentional failure mode handled is malformed or invalid LLM output. If parsing fails or the response violates schema/rules, the system fails closed and routes to `manual_review`. I also added one retry for transient LLM failures before fallback. This ensures robustness and prevents unsafe automation decisions.
